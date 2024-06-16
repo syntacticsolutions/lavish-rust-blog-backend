@@ -65,7 +65,7 @@ pub struct PostSummaryWithAuthorAndCategories {
     pub categories: Vec<String>,
 }
 
-async fn get_author_map(author_ids: Vec<i32>) -> Result<HashMap<i32, User>, Status> {
+pub async fn get_author_map(author_ids: Vec<i32>) -> Result<HashMap<i32, User>, Status> {
     let mut conn = establish_connection();
     let authors = users
         .filter(schema::users::id.eq_any(author_ids))
@@ -167,8 +167,8 @@ pub async fn get_all_posts() -> Result<Json<Vec<PostSummaryWithAuthorAndCategori
     let post_summaries_with_author_and_categories: Vec<PostSummaryWithAuthorAndCategories> = posts
         .into_iter()
         .map(|post| PostSummaryWithAuthorAndCategories {
-            author: author_map.get(&post.author_id).cloned().unwrap(),
-            categories: category_map.get(&post.id).cloned().unwrap(),
+            author: author_map.get(&post.author_id).cloned().unwrap_or_else(User::default),
+            categories: category_map.get(&post.id).cloned().unwrap_or(vec![]),
             post,
         })
         .collect();

@@ -42,6 +42,15 @@ table! {
     }
 }
 
+table! {
+    blog_post_comments (id) {
+        id -> Integer,
+        post_id -> Integer,
+        author_id -> Integer,
+        comment -> Varchar,
+    }
+}
+
 joinable!(blog_posts -> users (author_id));
 joinable!(blog_post_categories -> blog_posts (post_id));
 joinable!(blog_post_categories -> blog_categories (category_id));

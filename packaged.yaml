@@ -9,7 +9,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://lavishweb-rocket-app-bucket/e51c961a8f0f0bf59bd75671e1f776be
+      CodeUri: s3://lavishweb-rocket-app-bucket/9de83f39a0e29917ec67a81e65a24fa6
       Handler: DUMMY
       Runtime: provided.al2023
       MemorySize: 128

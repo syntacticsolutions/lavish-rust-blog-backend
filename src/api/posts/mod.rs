@@ -1,4 +1,4 @@
-mod crud;
+pub mod crud;
 
 use crate::api::posts::crud::{
     get_all_posts, get_post, BlogPostWithAuthorAndCategories, PostSummaryWithAuthorAndCategories,

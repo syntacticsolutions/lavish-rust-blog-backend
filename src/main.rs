@@ -17,6 +17,7 @@ use rocket_cors::{AllowedOrigins, CorsOptions};
 use std::str::FromStr;
 
 use crate::api::posts::{get_post_route, get_posts_route};
+use crate::api::comments::get_comments_route;
 
 fn rocket() -> Rocket<rocket::Build> {
     let allowed_origins = AllowedOrigins::some_exact(&[
@@ -33,9 +34,10 @@ fn rocket() -> Rocket<rocket::Build> {
     .to_cors()
     .expect("Error creating CORS fairing");
 
-    return rocket::build()
-        .attach(cors)
-        .mount("/", routes![get_posts_route, get_post_route]);
+    return rocket::build().attach(cors).mount(
+        "/",
+        routes![get_posts_route, get_post_route, get_comments_route],
+    );
 }
 
 async fn function_handler(event: Request) -> Result<Response<Body>, Error> {

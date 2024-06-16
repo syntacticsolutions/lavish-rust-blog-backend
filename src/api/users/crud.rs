@@ -1,7 +1,7 @@
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 // Create a model
-#[derive(Queryable, Serialize, Deserialize, Clone)]
+#[derive(Queryable, Serialize, Deserialize, Clone, Default)]
 pub struct User {
     pub id: i32,
     pub first_name: Option<String>,
